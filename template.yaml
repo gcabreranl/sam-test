@@ -9,7 +9,7 @@ Resources:
       CodeUri: app3/
       MemorySize: 128
       Events:
-        sam-test:
+        samTest:
           Type: Api
           Properties:
             Path: /test/{proxy+}
@@ -22,7 +22,7 @@ Resources:
       CodeUri: app2/
       MemorySize: 128
       Events:
-        sam-test:
+        samTest:
           Type: Api
           Properties:
             Path: /test2/{proxy+}
@@ -35,7 +35,7 @@ Resources:
       CodeUri: app/
       MemorySize: 128
       Events:
-        sam-test:
+        samTest:
           Type: Api
           Properties:
             Path: /test3/{proxy+}
