@@ -5,4 +5,6 @@ phases:
       python: 3.9
   build:
     commands:
-      - sam deploy -t template1.yaml --no-confirm-changeset --s3-bucket sam-testing-deploy --parameter-overrides ApiId=mjubyj8ifk
+      - git clone https://github.com/gcabreranl/sam-test.git
+      - cd sam-test
+      - sam deploy -t template1.yaml --no-confirm-changeset --s3-bucket sam-testing-deploy

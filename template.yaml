@@ -6,19 +6,37 @@ Resources:
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.9
-      CodeUri: ./
+      CodeUri: app3/
       MemorySize: 128
+      Events:
+        sam-test:
+          Type: Api
+          Properties:
+            Path: /test/{proxy+}
+            Method: ANY
   lambda2:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.9
-      CodeUri: ./
+      CodeUri: app2/
       MemorySize: 128
+      Events:
+        sam-test:
+          Type: Api
+          Properties:
+            Path: /test2/{proxy+}
+            Method: ANY
   lambda3:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.9
-      CodeUri: ./
+      CodeUri: app/
       MemorySize: 128
+      Events:
+        sam-test:
+          Type: Api
+          Properties:
+            Path: /test3/{proxy+}
+            Method: ANY
