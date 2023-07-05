@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  App:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      CodeUri: s3://sam-test-gonza/6b060bfc1c278d8018b5c7f3afa79a10
+      Events:
+        GetRoot:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        GetTest:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: get
+        GetTest2:
+          Type: Api
+          Properties:
+            Path: /test2
+            Method: get
+    Metadata:
+      SamResourceId: App

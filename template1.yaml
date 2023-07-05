@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AIWriter API
+    - AWS SAM: Serverless framework
+    - FastsAPI: Python framework
+    - Mangum: ASGI AWS adapter
+    - Uvicorn: ASGI Web server
+
+Parameters:
+  ApiId:
+    Type: String
+    Description: Existing API Gateway ID
+
+Resources:
+  AIWriterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: app/
+      Handler: app.handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        AIWriter:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+            RestApiId: !Ref ApiId
+  AIWriterFunction2:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: app2/
+      Handler: app.handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        AIWriter:
+          Type: Api
+          Properties:
+            Path: /test/{proxy+}
+            Method: ANY
+            RestApiId: !Ref ApiId
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  AIWriterApi:
+    Description: "API Gateway endpoint URL for Prod stage for AI Writer function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  AIWriterFunction:
+    Description: "AI Writer Lambda Function ARN"
+    Value: !GetAtt AIWriterFunction.Arn
+  AIWriterFunctionIamRole:
+    Description: "Implicit IAM Role created for AI Writer function"
+    Value: !GetAtt AIWriterFunctionRole.Arn
