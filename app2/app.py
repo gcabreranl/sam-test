@@ -15,7 +15,7 @@ def get_test():
 
 @app.get("/test2")
 def get_test():
-    return {"Testing3": "routes"}
+    return {"Testing3": "change2"}
 
 
 lambda_handler = Mangum(app, lifespan="off")
