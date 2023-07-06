@@ -11,7 +11,7 @@ def get_root():
 
 @app.get("/test")
 def get_test():
-    return {"Testing2": "routes"}
+    return {"Testing2": "change1"}
 
 @app.get("/test2")
 def get_test():
